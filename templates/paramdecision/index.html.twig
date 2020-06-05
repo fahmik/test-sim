@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paramdecision index{% endblock %}
+
+{% block body %}
+    <h1>Paramdecision index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Parametre</th>
+                <th>Valeurinit</th>
+                <th>Augmtour</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paramdecision in paramdecisions %}
+            <tr>
+                <td>{{ paramdecision.id }}</td>
+                <td>{{ paramdecision.parametre }}</td>
+                <td>{{ paramdecision.valeurinit }}</td>
+                <td>{{ paramdecision.augmtour }}</td>
+                <td>
+                    <a href="{{ path('paramdecision_show', {'id': paramdecision.id}) }}">show</a>
+                    <a href="{{ path('paramdecision_edit', {'id': paramdecision.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('paramdecision_new') }}">Create new</a>
+{% endblock %}

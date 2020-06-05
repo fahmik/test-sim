@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Paramdecision{% endblock %}
+
+{% block body %}
+    <h1>Create new Paramdecision</h1>
+
+    {{ include('paramdecision/_form.html.twig') }}
+
+    <a href="{{ path('paramdecision_index') }}">back to list</a>
+{% endblock %}

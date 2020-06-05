@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Paramdecision{% endblock %}
+
+{% block body %}
+    <h1>Edit Paramdecision</h1>
+
+    {{ include('paramdecision/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('paramdecision_index') }}">back to list</a>
+
+    {{ include('paramdecision/_delete_form.html.twig') }}
+{% endblock %}
