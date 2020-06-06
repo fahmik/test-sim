@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Decisiontour{% endblock %}
+
+{% block body %}
+    <h1>Edit Decisiontour</h1>
+
+    {{ include('decisiontour/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('decisiontour_index') }}">back to list</a>
+
+    {{ include('decisiontour/_delete_form.html.twig') }}
+{% endblock %}

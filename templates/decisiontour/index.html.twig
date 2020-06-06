@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Decisiontour index{% endblock %}
+
+{% block body %}
+    <h1>Decisiontour index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Valeur</th>
+                <th>Valhist</th>
+                <th>Decision</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for decisiontour in decisiontours %}
+            <tr>
+                <td>{{ decisiontour.id }}</td>
+                <td>{{ decisiontour.valeur }}</td>
+                <td>{{ decisiontour.valhist }}</td>
+                <td>{{ decisiontour.decision }}</td>
+                <td>
+                    <a href="{{ path('decisiontour_show', {'id': decisiontour.id}) }}">show</a>
+                    <a href="{{ path('decisiontour_edit', {'id': decisiontour.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('decisiontour_new') }}">Create new</a>
+{% endblock %}

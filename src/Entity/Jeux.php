@@ -193,6 +193,10 @@ class Jeux
 
         return $this;
     }
+    /*  public function __toString()
+    {
+        return $this->libelle;
+    }*/
 
     public function removeSession(Session $session): self
     {

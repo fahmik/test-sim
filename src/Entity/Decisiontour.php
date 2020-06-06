@@ -38,7 +38,7 @@ class Decisiontour
     private $idtour;
 
     /**
-     * @ORM\ManyToOne(targetEntity=ParamDecision::class, inversedBy="decisiontours")
+     * @ORM\ManyToOne(targetEntity=Paramdecision::class, inversedBy="decisiontours")
      */
     private $idparam;
 
@@ -95,12 +95,12 @@ class Decisiontour
         return $this;
     }
 
-    public function getIdparam(): ?ParamDecision
+    public function getIdparam(): ?Paramdecision
     {
         return $this->idparam;
     }
 
-    public function setIdparam(?ParamDecision $idparam): self
+    public function setIdparam(?Paramdecision $idparam): self
     {
         $this->idparam = $idparam;
 

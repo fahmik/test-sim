@@ -30,10 +30,7 @@ class Configjeux
      */
     private $niveau;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $idparent;
+
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
@@ -70,9 +67,20 @@ class Configjeux
      */
     private $paramdecisions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Configjeux::class, inversedBy="configjeuxes")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Configjeux::class, mappedBy="parent")
+     */
+    private $configjeuxes;
+
     public function __construct()
     {
         $this->paramdecisions = new ArrayCollection();
+        $this->configjeuxes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,17 +88,19 @@ class Configjeux
         return $this->id;
     }
 
-    public function getIdjeux(): ?int
+    public function getIdjeux(): ?Jeux
     {
         return $this->idjeux;
     }
 
-    public function setIdjeux(int $idjeux): self
+    public function setIdjeux(?Jeux $idjeux): self
     {
         $this->idjeux = $idjeux;
 
         return $this;
     }
+
+
 
     public function getCritere(): ?string
     {
@@ -116,17 +126,7 @@ class Configjeux
         return $this;
     }
 
-    public function getIdparent(): ?int
-    {
-        return $this->idparent;
-    }
 
-    public function setIdparent(int $idparent): self
-    {
-        $this->idparent = $idparent;
-
-        return $this;
-    }
 
     public function getPourcentage(): ?string
     {
@@ -213,6 +213,53 @@ class Configjeux
             // set the owning side to null (unless already changed)
             if ($paramdecision->getIdconfig() === $this) {
                 $paramdecision->setIdconfig(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getConfigjeuxes(): Collection
+    {
+        return $this->configjeuxes;
+    }
+    public function __toString()
+    {
+        return $this->critere;
+    }
+
+    public function addConfigjeux(self $configjeux): self
+    {
+        if (!$this->configjeuxes->contains($configjeux)) {
+            $this->configjeuxes[] = $configjeux;
+            $configjeux->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConfigjeux(self $configjeux): self
+    {
+        if ($this->configjeuxes->contains($configjeux)) {
+            $this->configjeuxes->removeElement($configjeux);
+            // set the owning side to null (unless already changed)
+            if ($configjeux->getParent() === $this) {
+                $configjeux->setParent(null);
             }
         }
 

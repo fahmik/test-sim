@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Configjeux;
-use App\Form\ConfigjeuxType;
+use App\Entity\Jeux;
+use App\Form\Configjeux1Type;
 use App\Repository\ConfigjeuxRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,12 +31,15 @@ class ConfigjeuxController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        //dd('hnaaa');
         $configjeux = new Configjeux();
-        $form = $this->createForm(ConfigjeuxType::class, $configjeux);
+        $form = $this->createForm(Configjeux1Type::class, $configjeux);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd('hnaaa');
             $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->persist($configjeux);
             $entityManager->flush();
 
@@ -63,7 +67,7 @@ class ConfigjeuxController extends AbstractController
      */
     public function edit(Request $request, Configjeux $configjeux): Response
     {
-        $form = $this->createForm(ConfigjeuxType::class, $configjeux);
+        $form = $this->createForm(Configjeux1Type::class, $configjeux);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -83,7 +87,7 @@ class ConfigjeuxController extends AbstractController
      */
     public function delete(Request $request, Configjeux $configjeux): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$configjeux->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $configjeux->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($configjeux);
             $entityManager->flush();
